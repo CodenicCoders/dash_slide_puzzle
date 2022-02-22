@@ -1,0 +1,30 @@
+name: infrastructure
+description: The layer containing all service implementations.
+
+version: 1.0.0+1
+
+publish_to: none
+
+environment:
+  sdk: ">=2.15.1 <3.0.0"
+
+dependencies:
+  codenic_logger: ^0.5.5-dev.1
+  domain:
+    path: ../domain
+  flutter:
+    sdk: flutter
+  just_audio: ^0.9.20
+  rxdart: ^0.27.3
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^0.2.0
+  very_good_analysis: ^2.4.0
+
+flutter:
+  module:
+    androidX: true
+    androidPackage: com.orga.infrastructure
+    iosBundleIdentifier: com.orga.infrastructure
