@@ -1,3 +1,4 @@
+/// Breakpoints for determining different screen sizes.
 abstract class Breakpoints {
   /// Max width for a small layout.
   static const double small = 600;

@@ -843,7 +843,6 @@ void main() {
         // test(
         //   'should print puzzle completion path of a solved 6x6 puzzle',
         //   () async {
-
         //     final createPuzzleResult =
         //         await puzzleService.createPuzzle(dimension: 6);
 
@@ -867,9 +866,11 @@ void main() {
         //         ..write('  x ')
         //         ..writeln(
         //           [
-        //             for (var d = 0; d < dimension; d++) d < 10 ? ' $d ' : '$d '
-        //           ] // ignore: lines_longer_than_80_chars
-        //               .reduce((value, element) => value + element),
+        //             for (var d = 0; d < dimension; d++)
+        //               d < 10
+        //                   ? ' $d '
+        //                   : '$d ' // ignore: lines_longer_than_80_chars
+        //           ].reduce((value, element) => value + element),
         //         )
         //         ..write('y +')
         //         ..writeln(
@@ -881,7 +882,7 @@ void main() {
         //         puzzleBoard.write('$y | ');
         //         for (var x = 0; x < dimension; x++) {
         //           final tile =
-        //               puzzle.tileWithCurrentPosition(Position(x: x, y: y));
+        //               puzzle.tileWithCurrentPosition(Position(x: x, y: y))!;
         //           final targetPosition = tile.targetPosition;
 
         //           puzzleBoard.write(

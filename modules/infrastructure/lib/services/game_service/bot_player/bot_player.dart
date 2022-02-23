@@ -4,22 +4,36 @@ import 'dart:core';
 import 'package:domain/domain.dart';
 import 'package:rxdart/rxdart.dart';
 
+/// The status of the [BotPlayer].
 enum BotStatus {
+  /// A status indicating that the bot player has not been started yet.
   notStarted,
+
+  /// A status indicating that the bot player is currently playing.
   started,
+
+  /// A status indicating the the bot player is disposed.
   closed,
 }
 
+/// {@template BotPlayer}
+///
+/// The bot player that traverses the [solvedPuzzle] to simulate bot play.
+///
+/// {@endtemplate}
 class BotPlayer {
-  BotPlayer({
-    required this.solvedPuzzle,
-    required GameSettings gameSettings,
-  }) : _gameSettings = gameSettings;
+  /// {@macro BotPlayer}
+  BotPlayer({required this.solvedPuzzle, required GameSettings gameSettings})
+      : _gameSettings = gameSettings;
 
+  /// The [Puzzle] traversed by the bot.
   final Puzzle solvedPuzzle;
   final GameSettings _gameSettings;
 
+  /// Streams the current [Puzzle] state of the bot.
   final puzzleMoveSubject = BehaviorSubject<Puzzle>();
+
+  /// Streams the active spell casted on the bot.
   final activeSpellStateSubject = BehaviorSubject<ActiveSpellState?>();
 
   /// The current status of the bot.
@@ -118,7 +132,8 @@ class BotPlayer {
   /// [_nextBotMoveTime].
   ///
   /// If the [ActiveSpellState] is [Spell.timeReversal], then the next move
-  /// time will be determined using the [GameSettings.botMoveCooldownMinDuration].
+  /// time will be determined using the
+  /// [GameSettings.botMoveCooldownMinDuration].
   void _updateNextMoveTime() {
     final moveCooldownMinDuration = _gameSettings.botMoveCooldownMinDuration;
     final moveCooldownMaxDuration = _gameSettings.botMoveCooldownMaxDuration;

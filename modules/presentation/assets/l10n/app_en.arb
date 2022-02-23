@@ -1,0 +1,206 @@
+{
+  "appTitle": "Dash\nSlide Puzzle",
+  "@appTitle": {
+    "description": "The app title displayed in the app bar"
+  },
+  "shareTitleGeneral": "Need help?",
+  "@shareTitleGeneral": {
+    "description": "The general text title displayed in the share dialog"
+  },
+  "shareTitleLost": "Better luck next time!",
+  "@shareTitleLost": {
+    "description": "The text title displayed in the share dialog when the user lost"
+  },
+  "shareTitleWon": "You won!",
+  "@shareTitleWon": {
+    "description": "The text title displayed in the share dialog when the user has won"
+  },
+  "shareDescription": "Share this puzzle to challenge your friends and see if they have what it takes to beat Dash",
+  "@shareDescription": {
+    "description": "The description displayed in the share dialog"
+  },
+  "showMenuTooltip": "Show menu",
+  "@showMenuTooltip": {
+    "description": "The tooltip shown in the dropdown menu button"
+  },
+  "keyboardShortcutsMenuItem": "keyboard shortcuts",
+  "@keyboardShortcutsMenuItem": {
+    "description": "The title for the keyboard shortcuts menu item"
+  },
+  "dashAnimatorPreviewMenuItem": "Dash animator preview",
+  "@dashAnimatorPreviewMenuItem": {
+    "description": "The title for the Dash animator preview menu item"
+  },
+  "tutorialMenuItem": "Youtube tutorial",
+  "@tutorialMenuItem": {
+    "description": "The title for the tutorial menu item"
+  },
+  "customizeDashKeyboardShortcutTitle": "Customize Dash",
+  "@customizeDashKeyboardShortcutTitle": {
+    "description": "The title for the Dash customization keyboard shortcut"
+  },
+  "customizeEnemyDashKeyboardShortcutTitle": "Customize enemy Dash",
+  "@customizeEnemyDashKeyboardShortcutTitle": {
+    "description": "The title for the enemy Dash customization keyboard shortcut"
+  },
+  "changeThemeKeyboardShortcutTitle": "Change theme",
+  "@changeThemeKeyboardShortcutTitle": {
+    "description": "The title for the theme change keyboard shortcut"
+  },
+  "changeThemeKeyboardShortcutKey": "/",
+  "@changeThemeKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for theme changing"
+  },
+  "volumeKeyboardShortcutTitle": "On/off volume",
+  "@volumeKeyboardShortcutTitle": {
+    "description": "The title for the volume control keyboard shortcut"
+  },
+  "volumeKeyboardShortcutKey": "M",
+  "@volumeKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for the volume control"
+  },
+  "viewPuzzleReferenceKeyboardShortcutTitle": "View puzzle reference",
+  "@viewPuzzleKeyboardShortcutTitle": {
+    "description": "The title for the puzzle reference view keyboard shortcut"
+  },
+  "viewPuzzleReferenceKeyboardShortcutKey": "Z",
+  "@viewPuzzleReferenceKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for viewing the puzzle reference"
+  },
+  "gameActionKeyboardShortcutTitle": "Start/restart game",
+  "@gameActionKeyboardShortcutTitle": {
+    "description": "The title for the game action keyboard shortcut"
+  },
+  "gameActionKeyboardShortcutKey": "Enter",
+  "@gameActionKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for starting or restarting the game"
+  },
+  "inGameKeyboardShortcutsTitle": "In Game",
+  "@inGameKeyboardShortcutsTitle": {
+    "description": "The title for in-game shortcuts keys in the keyboard shortcut dialog"
+  },
+  "moveTileUpwardKeyboardShortcutTitle": "Move tile upward",
+  "@moveTileUpwardKeyboardShortcutTitle": {
+    "description": "The title for the tile upward move keyboard shortcut"
+  },
+  "moveTileDownwardKeyboardShortcutTitle": "Move tile downward",
+  "@moveTileDownwardKeyboardShortcutTitle": {
+    "description": "The title for the tile downward move keyboard shortcut"
+  },
+  "moveTileToTheLeftKeyboardShortcutTitle": "Move tile to the left",
+  "@moveTileToTheLeftKeyboardShortcutTitle": {
+    "description": "The title for the tile left move keyboard shortcut"
+  },
+  "moveTileToTheRightKeyboardShortcutTitle": "Move tile to the right",
+  "@moveTileToTheRightKeyboardShortcutTitle": {
+    "description": "The title for the tile right move keyboard shortcut"
+  },
+  "castSpellKeyboardShortcutTitle": "Cast spell",
+  "@castSpellKeyboardShortcutTitle": {
+    "description": "The title for the cast spell keyboard shortcut"
+  },
+  "castSpellKeyboardShortcutKey": "Space",
+  "@castSpellKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for casting a spell"
+  },
+  "inDashAnimatorPreviewKeyboardShortcutsTitle": "In Dash Animator Preview",
+  "@inDashAnimatorPreviewKeyboardShortcutsTitle": {
+    "description": "The title for Dash Animator Preview shortcuts keys in the keyboard shortcut dialog"
+  },
+  "dashIdlePoseKeyboardShortcutTitle": "Idle",
+  "@dashIdlePoseKeyboardShortcutTitle": {
+    "description": "The title for Dash's idle pose keyboard shortcut"
+  },
+  "dashIdlePoseKeyboardShortcutKey": "`",
+  "@dashIdlePoseKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for Dash's idle pose"
+  },
+  "dashHappyPoseKeyboardShortcutTitle": "Happy",
+  "@dashHappyPoseKeyboardShortcutTitle": {
+    "description": "The title for Dash's happy pose keyboard shortcut"
+  },
+  "dashHappyPoseKeyboardShortcutKey": "1",
+  "@dashHappyPoseKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for Dash's happy pose"
+  },
+  "dashTossPoseKeyboardShortcutTitle": "Toss",
+  "@dashTossPoseKeyboardShortcutTitle": {
+    "description": "The title for Dash's toss pose keyboard shortcut"
+  },
+  "dashTossPoseKeyboardShortcutKey": "2",
+  "@dashTossPoseKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for Dash's toss pose"
+  },
+  "dashTauntPoseKeyboardShortcutTitle": "Taunt",
+  "@dashTauntPoseKeyboardShortcutTitle": {
+    "description": "The title for Dash's taunt pose keyboard shortcut"
+  },
+  "dashTauntPoseKeyboardShortcutKey": "3",
+  "@dashTauntPoseKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for Dash's taunt pose"
+  },
+  "dashExcitedPoseKeyboardShortcutTitle": "Excited",
+  "@dashExcitedPoseKeyboardShortcutTitle": {
+    "description": "The title for Dash's excited pose keyboard shortcut"
+  },
+  "dashExcitedPoseKeyboardShortcutKey": "4",
+  "@dashExcitedPoseKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for Dash's excited pose"
+  },
+  "dashSkepticismPoseKeyboardShortcutTitle": "Skepticism",
+  "@dashSkepticismPoseKeyboardShortcutTitle": {
+    "description": "The title for Dash's skepticism pose keyboard shortcut"
+  },
+  "dashSkepticismPoseKeyboardShortcutKey": "5",
+  "@dashSkepticismPoseKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for Dash's skepticism pose"
+  },
+  "dashShockedPoseKeyboardShortcutTitle": "Shocked",
+  "@dashShockedPoseKeyboardShortcutTitle": {
+    "description": "The title for Dash's shocked pose keyboard shortcut"
+  },
+  "dashShockedPoseKeyboardShortcutKey": "6",
+  "@dashShockedPoseKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for Dash's shocked pose"
+  },
+  "dashLostPoseKeyboardShortcutTitle": "Loser",
+  "@dashLostPoseKeyboardShortcutTitle": {
+    "description": "The title for Dash's lost pose keyboard shortcut"
+  },
+  "dashLostPoseKeyboardShortcutKey": "7",
+  "@dashLostPoseKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for Dash's lost pose"
+  },
+  "dashWavePoseKeyboardShortcutTitle": "Wave",
+  "@dashWavePoseKeyboardShortcutTitle": {
+    "description": "The title for Dash's wave pose keyboard shortcut"
+  },
+  "dashWavePoseKeyboardShortcutKey": "8",
+  "@dashWavePoseKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for Dash's wave pose"
+  },
+  "dashCastSpellPoseKeyboardShortcutTitle": "Spellcast",
+  "@dashCastSpellPoseKeyboardShortcutTitle": {
+    "description": "The title for Dash's spellcasting pose keyboard shortcut"
+  },
+  "dashCastSpellPoseKeyboardShortcutKey": "9",
+  "@dashCastSpellPoseKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for Dash's spellcasting pose"
+  },
+  "dashWizardTauntPoseKeyboardShortcutTitle": "Wizard taunt",
+  "@dashWizardTauntPoseKeyboardShortcutTitle": {
+    "description": "The title for Dash's wizard taunt pose keyboard shortcut"
+  },
+  "dashWizardTauntPoseKeyboardShortcutKey": "0",
+  "@dashWizardTauntPoseKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for Dash's wizard taunt pose"
+  },
+  "customizeDashAttireKeyboardShortcutTitle": "Customize Dash",
+  "@customizeDashAttireKeyboardShortcutTitle": {
+    "description": "The title for Dash's attire customization keyboard shortcut in the Dash animator preview"
+  },
+  "customizeDashAttireKeyboardShortcutKey": "Space",
+  "@customizeDashAttireKeyboardShortcutKey": {
+    "description": "They keyboard shortcut symbol for customizing Dash's attire in the Dash animator preview"
+  }
+}

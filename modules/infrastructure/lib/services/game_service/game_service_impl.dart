@@ -252,7 +252,7 @@ class GameServiceImpl implements GameService {
     ]);
   }
 
-  /// Enables the bot to start solving the [puzzle].
+  /// Enables the bot to start solving the puzzle.
   ///
   /// The bot automatically stops when it detects that the game has ended.
   Future<void> _startBot({

@@ -5,3 +5,4 @@ export 'puzzle_board.dart';
 export 'puzzle_board_group_layout.dart';
 export 'puzzle_keyboard_handler.dart';
 export 'puzzle_tile.dart';
+export 'puzzle_tile.dart';

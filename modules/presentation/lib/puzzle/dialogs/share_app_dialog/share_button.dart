@@ -4,7 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_social_button/flutter_social_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-enum ShareButtonType { twitter, facebook }
+/// Contains the available social media for sharing the app.
+enum SocialMedia {
+  /// A share button identifier for Twitter
+  twitter,
+
+  /// A share button identifier for Facebook
+  facebook,
+}
 
 /// {@template ShareButton}
 ///
@@ -13,12 +20,12 @@ enum ShareButtonType { twitter, facebook }
 /// {@endtemplate}
 class ShareButton extends StatelessWidget {
   /// {@macro ShareButton}
-  const ShareButton({required this.shareButtonType, Key? key})
-      : super(key: key);
+  const ShareButton({required this.socialMedia, Key? key}) : super(key: key);
 
   static const _appUrl = 'https://dominicorga.codenic.dev/dash-slide-puzzle';
 
-  final ShareButtonType shareButtonType;
+  /// The target social media for sharing the app.
+  final SocialMedia socialMedia;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,7 @@ class ShareButton extends StatelessWidget {
       mini: true,
       onTap: () async {
         final watchGameStateUseCase = context.read<app.WatchGameStateUseCase>();
-        final gameStatus = watchGameStateUseCase.rightEvent?.status;
+        final gameStatus = watchGameStateUseCase.rightEvent.status;
 
         final shareUrl = _shareUrl(gameStatus);
 
@@ -39,10 +46,10 @@ class ShareButton extends StatelessWidget {
   }
 
   ButtonType _buttonType() {
-    switch (shareButtonType) {
-      case ShareButtonType.twitter:
+    switch (socialMedia) {
+      case SocialMedia.twitter:
         return ButtonType.twitter;
-      case ShareButtonType.facebook:
+      case SocialMedia.facebook:
         return ButtonType.facebook;
     }
   }
@@ -51,10 +58,10 @@ class ShareButton extends StatelessWidget {
     final shareText = _message(gameStatus);
     final shareTextEncoded = Uri.encodeComponent(shareText);
 
-    switch (shareButtonType) {
-      case ShareButtonType.twitter:
+    switch (socialMedia) {
+      case SocialMedia.twitter:
         return 'https://twitter.com/intent/tweet?url=$_appUrl&text=$shareTextEncoded';
-      case ShareButtonType.facebook:
+      case SocialMedia.facebook:
         return 'https://www.facebook.com/sharer.php?u=$_appUrl&quote=$shareTextEncoded';
     }
   }

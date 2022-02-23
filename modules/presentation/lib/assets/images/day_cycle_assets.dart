@@ -1,13 +1,16 @@
 import 'package:application/application.dart';
-import 'package:path/path.dart' as p;
+import 'package:presentation/presentation.dart';
 
+/// A class for fetching the day cycle assets (day, prevening, evening).
 class DayCycleAssets {
   const DayCycleAssets._();
 
   static final _root =
-      p.join('packages', 'presentation', 'assets', 'images', 'day_cycles');
+      join(['packages', 'presentation', 'assets', 'images', 'day_cycles']);
 
-  static String image(ThemeOption themeOption) {
+  /// Returns the file path to a day cycle asset respective to the given
+  /// [themeOption].
+  static String dayCycle(ThemeOption themeOption) {
     final String fileName;
 
     switch (themeOption) {
@@ -21,6 +24,6 @@ class DayCycleAssets {
         fileName = 'prevening.webp';
     }
 
-    return p.join(_root, fileName);
+    return join([_root, fileName]);
   }
 }

@@ -1,6 +1,10 @@
 #!/bin/sh
 
-# Cleans and refetches all dependencies in preparation for an app build.
+# FOR MAC OS AND LINUX SYSTEMS
+
+# This script does the following:
+# - Cleans the project
+# - Refetches all dependencies
 
 flutter clean
 flutter pub get modules/domain

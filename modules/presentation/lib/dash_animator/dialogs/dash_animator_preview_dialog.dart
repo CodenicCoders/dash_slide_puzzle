@@ -2,9 +2,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:presentation/presentation.dart';
 
+/// A pop-up dialog for viewing and playing around with the Dash animator.
 class DashAnimatorPreviewDialog {
   DashAnimatorPreviewDialog._();
 
+  /// Shows the dialog.
   static void show({required BuildContext context}) {
     final focusNode = FocusNode();
 
@@ -83,8 +85,7 @@ class DashAnimatorPreviewDialog {
                     dimension: 400,
                     child: DashAnimator(
                       animationState: animationState,
-                      dashBody: dashAttire.dashBody,
-                      dashDevice: dashAttire.dashDevice,
+                      dashAttire: dashAttire,
                     ),
                   ),
                 ),

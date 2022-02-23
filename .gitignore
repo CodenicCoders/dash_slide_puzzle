@@ -45,3 +45,15 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Firebase
+**/*.cache
+firebase.json
+.firebaserc
+.firebase
+
+# Android related
+**/debug.keystore
+**/release.keystore
+**/debugkey.properties
+**/releasekey.properties

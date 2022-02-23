@@ -267,7 +267,9 @@ class PuzzleServiceImpl implements PuzzleService {
     }
 
     final isTileMovableResult = await isTileMovable(
-        puzzle: puzzle, tileCurrentPosition: tileCurrentPosition);
+      puzzle: puzzle,
+      tileCurrentPosition: tileCurrentPosition,
+    );
 
     final isMovable = isTileMovableResult.getRight();
 

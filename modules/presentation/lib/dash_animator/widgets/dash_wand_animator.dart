@@ -1,10 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:presentation/assets/assets.dart';
 import 'package:presentation/dash_animator/dash_animator.dart';
 import 'package:presentation/helpers/helpers.dart';
-import 'package:simple_shadow/simple_shadow.dart';
 
 /// {@template DashWandAnimator}
 ///
@@ -20,8 +17,15 @@ class DashWandAnimator extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  /// Dictates the animated pose of the wand.
   final DashAnimationState animationState;
+
+  /// The [Animation] for moving the wand.
   final Animation<double> animation;
+
+  /// The bounding box of Dash.
+  ///
+  /// This is used to determine the proportion of the wand.
   final double boundingSize;
 
   @override
@@ -33,7 +37,6 @@ class DashWandAnimator extends StatelessWidget {
     final double minRotation;
     final double maxRotation;
     final Curve rotationCurve;
-    final Curve wandGlowCurve;
 
     switch (animationState) {
       case DashAnimationState.idle:
@@ -49,21 +52,18 @@ class DashWandAnimator extends StatelessWidget {
         minRotation = -30.0;
         maxRotation = 0.0;
         rotationCurve = Curves.easeInOutBack;
-        wandGlowCurve = const ArcCurve();
         break;
       case DashAnimationState.spellcast:
         showWand = true;
         minRotation = -30.0;
         maxRotation = 0.0;
         rotationCurve = Curves.easeInOutBack;
-        wandGlowCurve = const ArcCurve();
         break;
       case DashAnimationState.wizardTaunt:
         showWand = true;
         minRotation = 0;
         maxRotation = 30;
         rotationCurve = const McDonaldCurve();
-        wandGlowCurve = const McDonaldCurve();
         break;
     }
 
@@ -92,36 +92,13 @@ class DashWandAnimator extends StatelessWidget {
               );
             },
             child: showWand
-                ? _Wand(
-                    animation: CurvedAnimation(
-                      parent: animation,
-                      curve: wandGlowCurve,
-                    ),
+                ? Image.asset(
+                    DashSpriteAssets.wand,
+                    key: ValueKey(DashSpriteAssets.wand),
                   )
                 : null,
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _Wand extends AnimatedWidget {
-  const _Wand({required Animation<double> animation, Key? key})
-      : super(key: key, listenable: animation);
-
-  @override
-  Widget build(BuildContext context) {
-    final animation = listenable as Animation<double>;
-
-    return SimpleShadow(
-      color: Colors.white,
-      sigma: max(192 * (1 - animation.value), 2),
-      opacity: 1,
-      offset: Offset.zero,
-      child: Image.asset(
-        DashSpriteAssets.wand,
-        key: ValueKey(DashSpriteAssets.wand),
       ),
     );
   }

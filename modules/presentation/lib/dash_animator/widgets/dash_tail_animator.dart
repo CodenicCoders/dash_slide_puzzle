@@ -14,8 +14,15 @@ class DashTailAnimator extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  /// Dictates the animated pose of the tail.
   final DashAnimationState animationState;
+
+  /// The [Animation] for moving the tail.
   final Animation<double> animation;
+
+  /// The bounding box of Dash.
+  ///
+  /// This is used to determine the proportion of the tail.
   final double boundingSize;
 
   @override

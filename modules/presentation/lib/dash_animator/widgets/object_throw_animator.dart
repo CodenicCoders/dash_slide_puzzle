@@ -3,8 +3,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:presentation/assets/assets.dart';
 
+/// Contains all the throwable objects that can be thrown by Dash.
 enum ThrowableObject {
+  /// Dash throws a pizza.
   pizza,
+
+  /// Dash throws a stone.
   stone,
 }
 
@@ -47,7 +51,10 @@ class ObjectThrowAnimator extends StatefulWidget {
   /// animation.
   final Duration inOutAnimationDuration;
 
+  /// The start position of the [throwableObject].
   final GlobalKey startObject;
+
+  /// The end position of the [throwableObject].
   final GlobalKey endObject;
 
   /// The object to throw.
@@ -76,15 +83,17 @@ class _ObjectThrowAnimatorState extends State<ObjectThrowAnimator>
   late final AnimationController _postThrowAnimation;
 
   // The position of the throwable object in the X-plane.
-  double _x = 0;
+  double _throwableObjectDx = 0;
 
   /// The position of the throwable object in the Y-plane.
-  double _y = 0;
+  double _throwableObjectDy = 0;
 
   /// The size of the throwable object.
-  double _dimension = 0;
+  double _throwableObjectSize = 0;
 
-  void updateStates({required double t, bool callSetState = true}) {
+  /// Calculates the new [_throwableObjectDx] and [_throwableObjectDy]
+  /// properties based on the [t] animation value.
+  void _updateStates({required double t, bool callSetState = true}) {
     final startRenderBox =
         widget.startObject.currentContext?.findRenderObject() as RenderBox?;
 
@@ -95,38 +104,40 @@ class _ObjectThrowAnimatorState extends State<ObjectThrowAnimator>
       return;
     }
 
-    _dimension = startRenderBox.size.shortestSide * 0.4;
+    // Determine the size of the throwable object proportional to the start
+    // object
+    _throwableObjectSize = startRenderBox.size.shortestSide * 0.4;
 
     final startPosition = startRenderBox.localToGlobal(Offset.zero);
     final endPosition = endRenderBox.localToGlobal(Offset.zero);
 
-    final offset = _dimension / 2.2;
+    /// The offset for the throwable object to center it in its bounding box
+    final offset = _throwableObjectSize / 2.2;
 
-    final x0 = startPosition.dx;
-    final y0 = startPosition.dy;
+    final x1 = startPosition.dx;
+    final y1 = startPosition.dy;
 
-    final x1 = endPosition.dx;
-    final y1 = endPosition.dy;
+    final x2 = endPosition.dx;
+    final y2 = endPosition.dy;
 
-    final midY = y1 + y0 / 2;
+    final midY = y2 + y1 / 2;
+
     final baseHeight = midY - midY * widget.trajectoryCoefficient;
 
-    final leftHeight = y0 - baseHeight;
-    final rightHeight = y1 - baseHeight;
+    final leftHeight = y1 - baseHeight;
+    final rightHeight = y2 - baseHeight;
 
-    _x = (x1 - x0) * t + x0 - offset;
+    _throwableObjectDx = (x2 - x1) * t + x1 - offset;
 
-    final leftAligned = _x - x0 <= x1 - _x;
+    final leftAligned = _throwableObjectDx - x1 <= x2 - _throwableObjectDx;
     final preferredHeight =
         leftAligned ? leftHeight + offset : rightHeight - offset;
 
     final dy = preferredHeight * (1 - sin(pi * t));
 
-    _y = dy + baseHeight;
+    _throwableObjectDy = dy + baseHeight;
 
-    if (callSetState) {
-      setState(() {});
-    }
+    if (callSetState) setState(() {});
   }
 
   @override
@@ -140,9 +151,9 @@ class _ObjectThrowAnimatorState extends State<ObjectThrowAnimator>
       ..addListener(
         () {
           if (_inOutAnimation.status == AnimationStatus.forward) {
-            updateStates(t: 0);
+            _updateStates(t: 0);
           } else if (_inOutAnimation.status == AnimationStatus.reverse) {
-            updateStates(t: 1);
+            _updateStates(t: 1);
           }
         },
       )
@@ -157,7 +168,7 @@ class _ObjectThrowAnimatorState extends State<ObjectThrowAnimator>
       vsync: this,
       duration: widget.preThrowDuration,
     )
-      ..addListener(() => updateStates(t: 0))
+      ..addListener(() => _updateStates(t: 0))
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _throwAnimation.forward();
@@ -168,7 +179,7 @@ class _ObjectThrowAnimatorState extends State<ObjectThrowAnimator>
       vsync: this,
       duration: widget.throwDuration,
     )
-      ..addListener(() => updateStates(t: _throwAnimation.value))
+      ..addListener(() => _updateStates(t: _throwAnimation.value))
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _postThrowAnimation.forward();
@@ -179,7 +190,7 @@ class _ObjectThrowAnimatorState extends State<ObjectThrowAnimator>
       vsync: this,
       duration: widget.postThrowDuration,
     )
-      ..addListener(() => updateStates(t: 1))
+      ..addListener(() => _updateStates(t: 1))
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _inOutAnimation.reverse();
@@ -201,14 +212,14 @@ class _ObjectThrowAnimatorState extends State<ObjectThrowAnimator>
     return Stack(
       children: [
         Positioned(
-          left: _x,
-          top: _y,
+          left: _throwableObjectDx,
+          top: _throwableObjectDy,
           child: Transform.scale(
             scale: _inOutAnimation.value,
             child: SizedBox.square(
-              dimension: _dimension,
+              dimension: _throwableObjectSize,
               child: Image.asset(
-                ThrowableAssets.image(widget.throwableObject),
+                ThrowableAssets.throwable(widget.throwableObject),
               ),
             ),
           ),

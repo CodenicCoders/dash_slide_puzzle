@@ -1,13 +1,14 @@
-import 'package:path/path.dart' as p;
-import 'package:presentation/dash_animator/widgets/widgets.dart';
+import 'package:presentation/presentation.dart';
 
+/// A class for fetching throwable assets.
 class ThrowableAssets {
   const ThrowableAssets._();
 
   static final _root =
-      p.join('packages', 'presentation', 'assets', 'images', 'throwables');
+      join(['packages', 'presentation', 'assets', 'images', 'throwables']);
 
-  static String image(ThrowableObject throwable) {
+  /// Returns the file path of the specified [throwable] object.
+  static String throwable(ThrowableObject throwable) {
     final String fileName;
 
     switch (throwable) {
@@ -18,6 +19,6 @@ class ThrowableAssets {
         fileName = 'stone.webp';
     }
 
-    return p.join(_root, fileName);
+    return join([_root, fileName]);
   }
 }

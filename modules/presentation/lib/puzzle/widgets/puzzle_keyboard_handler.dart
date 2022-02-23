@@ -70,17 +70,18 @@ class _PuzzleKeyboardHandlerState extends State<PuzzleKeyboardHandler> {
       } else if (physicalKey == PhysicalKeyboardKey.keyM) {
         _muteOrUnmute();
       }
+      
     }
   }
 
   void _moveTile(PhysicalKeyboardKey physicalKey) {
     final gameState = context.read<app.WatchGameStateUseCase>().rightEvent;
 
-    if (gameState?.status != app.GameStatus.playing) {
+    if (gameState.status != app.GameStatus.playing) {
       return;
     }
 
-    final playerPuzzle = gameState!.playerPuzzle;
+    final playerPuzzle = gameState.playerPuzzle;
 
     final app.Tile? tileToMove;
 
@@ -112,7 +113,7 @@ class _PuzzleKeyboardHandlerState extends State<PuzzleKeyboardHandler> {
   void _castSpell() {
     final gameState = context.read<app.WatchGameStateUseCase>().rightEvent;
 
-    if (gameState?.status != app.GameStatus.playing) {
+    if (gameState.status != app.GameStatus.playing) {
       return;
     }
 
@@ -133,7 +134,7 @@ class _PuzzleKeyboardHandlerState extends State<PuzzleKeyboardHandler> {
 
   void _startOrResetGame() {
     final gameState = context.read<app.WatchGameStateUseCase>().rightEvent;
-    final gameStatus = gameState?.status;
+    final gameStatus = gameState.status;
 
     if (gameStatus == app.GameStatus.initializing) {
       return;

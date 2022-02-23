@@ -5,8 +5,15 @@ import 'package:presentation/constants/breakpoints.dart';
 import 'package:presentation/spell_handler/available_spell_indicator.dart';
 import 'package:presentation/spell_handler/spell_banner.dart';
 
+/// {@template SpellHandler}
+///
+/// A widget managing and exhibition of the [AvailableSpellIndicator] and the
+/// [SpellBanner].
+///
+/// {@endtemplate}
 class SpellHandler extends StatefulWidget {
-  const SpellHandler();
+  /// {@macro SpellHandler}
+  const SpellHandler({Key? key}) : super(key: key);
 
   @override
   State<SpellHandler> createState() => _SpellHandlerState();
@@ -32,11 +39,10 @@ class _SpellHandlerState extends State<SpellHandler> {
 
   @override
   Widget build(BuildContext context) {
-    final availableSpellState = context.select<
-        app.WatchAvailableSpellStateUseCase,
-        app.AvailableSpellState?>((useCase) => useCase.rightEvent);
-
-    final showEnergyIndicator = availableSpellState != null;
+    final showEnergyIndicator =
+        context.select<app.WatchAvailableSpellStateUseCase, bool>(
+      (useCase) => useCase.rightEvent != null,
+    );
 
     return BlocListener<app.CastAvailableSpellUseCase, app.RunnerState>(
       listener: (context, state) {
@@ -74,9 +80,7 @@ class _SpellHandlerState extends State<SpellHandler> {
                       child: SpellBanner(spell: _recentlyCastedSpell!),
                     )
                   : showEnergyIndicator
-                      ? AvailableSpellIndicator(
-                          spellEnergy: availableSpellState.energy,
-                        )
+                      ? const AvailableSpellIndicator()
                       : null,
             ),
           ],

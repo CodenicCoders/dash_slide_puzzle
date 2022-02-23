@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/assets/assets.dart';
 
+/// {@template SpellButton}
+///
+/// A button for activating the available spell.
+///
+/// {@endtemplate}
 class SpellButton extends StatelessWidget {
+  /// {@macro SpellButton}
   const SpellButton({Key? key}) : super(key: key);
 
   @override
@@ -26,7 +32,7 @@ class SpellButton extends StatelessWidget {
         child: availableSpell == null
             ? null
             : Image.asset(
-                SpellAssets.image(availableSpell),
+                SpellAssets.spell(availableSpell),
                 key: ValueKey(availableSpell),
               ),
       ),

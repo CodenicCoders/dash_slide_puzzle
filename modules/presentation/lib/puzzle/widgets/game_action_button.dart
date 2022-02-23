@@ -17,8 +17,8 @@ class StartGameButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameStatus =
-        context.select<app.WatchGameStateUseCase, app.GameStatus?>(
-      (state) => state.rightEvent?.status,
+        context.select<app.WatchGameStateUseCase, app.GameStatus>(
+      (state) => state.rightEvent.status,
     );
 
     return FittedBox(
@@ -31,10 +31,9 @@ class StartGameButton extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             borderRadius: BorderRadius.circular(100),
-            onTap:
-                gameStatus != null && gameStatus != app.GameStatus.initializing
-                    ? () => _onButtonClicked(context, gameStatus)
-                    : null,
+            onTap: gameStatus != app.GameStatus.initializing
+                ? () => _onButtonClicked(context, gameStatus)
+                : null,
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 12,

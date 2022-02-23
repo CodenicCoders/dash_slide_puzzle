@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// {@template SyncedAnimatedRotation}
 ///
 /// A widget with support for animating its rotation that smoothly syncs with
-/// changing [Animation]s.
+/// a new [minRotation], [maxRotation] or [anchorPoint].
 ///
 /// {@endtemplate}
 class SyncedAnimatedRotation extends AnimatedWidget {
@@ -29,9 +29,11 @@ class SyncedAnimatedRotation extends AnimatedWidget {
   /// See [AnimatedContainer.transformAlignment].
   final AlignmentGeometry anchorPoint;
 
-  final Curve curve;
-
+  /// The widget below this widget in the tree.
   final Widget child;
+
+  /// The animation curve.
+  final Curve curve;
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +41,6 @@ class SyncedAnimatedRotation extends AnimatedWidget {
 
     final newRotation = Tween(begin: minRotation, end: maxRotation)
         .transform(curve.transform(animation.value));
-
-    // final newRotation =
-    //     Tween(begin: minRotation, end: maxRotation).evaluate(animation);
 
     return AnimatedContainer(
       transformAlignment: anchorPoint,

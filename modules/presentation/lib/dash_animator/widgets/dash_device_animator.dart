@@ -18,9 +18,18 @@ class DashDeviceAnimator extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  /// Dictates the animated pose of the device.
   final DashAnimationState animationState;
+
+  /// The [Animation] for moving the device.
   final Animation<double> animation;
+
+  /// The bounding box of Dash.
+  ///
+  /// This is used to determine the proportion of the device.
   final double boundingSize;
+
+  /// The device held by Dash.
   final DashDevice dashDevice;
 
   @override
@@ -103,16 +112,8 @@ class DashDeviceAnimator extends StatelessWidget {
           anchorPoint: anchorPoint,
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
-            transitionBuilder: (child, animation) {
-              return FadeTransition(
-                opacity: animation,
-                child: SlideTransition(
-                  position: Tween(begin: const Offset(1, 0), end: Offset.zero)
-                      .animate(animation),
-                  child: child,
-                ),
-              );
-            },
+            transitionBuilder: (child, animation) =>
+                FadeTransition(opacity: animation, child: child),
             child: showDevice
                 ? Image.asset(
                     DashSpriteAssets.device(dashDevice),

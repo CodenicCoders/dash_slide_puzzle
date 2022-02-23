@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/assets/assets.dart';
+import 'package:presentation/l10n/app_localizations.dart';
+import 'package:presentation/puzzle/page/puzzle_page.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
+/// {@template AppBarTitle}
+///
+/// The app bar title for the [PuzzlePage].
+///
+/// {@endtemplate}
 class AppBarTitle extends StatelessWidget {
+  /// {@macro AppBarTitle}
   const AppBarTitle({Key? key}) : super(key: key);
 
   @override
@@ -17,15 +25,9 @@ class AppBarTitle extends StatelessWidget {
             child: Image.asset(LogoAssets.flutter, scale: 6),
           ),
           const SizedBox(width: 8),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SimpleShadow(offset: Offset.zero, child: const Text('Dash')),
-              SimpleShadow(
-                offset: Offset.zero,
-                child: const Text('Slide Puzzle'),
-              ),
-            ],
+          SimpleShadow(
+            offset: Offset.zero,
+            child: Text(AppLocalizations.of(context).appTitle),
           ),
         ],
       ),

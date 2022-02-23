@@ -35,7 +35,10 @@ class PlayLocalAudioParams with EquatableMixin {
     required this.audioPlayerChannel,
   });
 
+  /// The path to the audio file to play.
   final String audioFilePath;
+
+  /// The audio player channel to use.
   final dynamic audioPlayerChannel;
 
   @override

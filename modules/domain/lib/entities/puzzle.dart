@@ -135,6 +135,8 @@ class Puzzle with EquatableMixin {
   bool isTilesEqual(Puzzle other) =>
       const ListEquality<Tile>().equals(tiles, other.tiles);
 
+  /// Creates a copy of this [Puzzle] but with the given fields
+  /// replaced with the new values.
   Puzzle copyWith({
     UnmodifiableListView<Tile>? tiles,
     Puzzle? previousPuzzle,

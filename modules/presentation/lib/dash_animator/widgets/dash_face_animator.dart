@@ -15,7 +15,12 @@ class DashFaceAnimator extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  /// Dictates the animated pose of the face.
   final DashAnimationState animationState;
+
+  /// The bounding box of Dash.
+  ///
+  /// This is used to determine the proportion of the face.
   final double boundingSize;
 
   @override

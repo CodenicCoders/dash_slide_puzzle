@@ -1,6 +1,7 @@
 import 'package:domain/domain.dart';
 import 'package:domain/failures/concurrent_method_call_failure.dart';
 
+/// A service for managing the puzzle game.
 abstract class GameService {
   /// Returns a [VerboseStream] that emits the current [GameState].
   Future<Either<Failure, VerboseStream<Failure, GameState>>> watchGameState();
@@ -63,8 +64,8 @@ abstract class GameService {
     required Position tileCurrentPosition,
   });
 
-  /// Casts the available [Spell] from the [AvailableSpellState] at the bot 
-  /// which lasts based on the current [GameSettings.spellDuration] then 
+  /// Casts the available [Spell] from the [AvailableSpellState] at the bot
+  /// which lasts based on the current [GameSettings.spellDuration] then
   /// returns the casted spell.
   ///
   /// The casted spell takes effect after the [GameSettings.spellCastDelay].

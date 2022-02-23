@@ -52,6 +52,8 @@ class AvailableSpellState with EquatableMixin {
   /// The spell that can be casted by the user.
   final Spell? spell;
 
+  /// Creates a copy of this [AvailableSpellState] but with the given fields
+  /// replaced with the new values.
   AvailableSpellState copyWith({
     double? energy,
     bool? isRecentSpell,

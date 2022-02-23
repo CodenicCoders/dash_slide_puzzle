@@ -1,5 +1,5 @@
 export 'dash_animator.dart';
-export 'dash_animator_group_control.dart';
+export 'dash_animator_group/dash_animator_group.dart';
 export 'dash_body_animator.dart';
 export 'dash_comb_animator.dart';
 export 'dash_device_animator.dart';

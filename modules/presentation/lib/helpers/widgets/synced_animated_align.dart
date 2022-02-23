@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// {@template SyncedAnimatedAlign}
 ///
 /// A widget with support for animating its aligned position that smoothly
-/// syncs with changing [Animation]s.
+/// syncs with a new [startAlignment] or [endAlignment].
 ///
 /// {@endtemplate}
 class SyncedAnimatedAlign extends AnimatedWidget {
@@ -17,12 +17,16 @@ class SyncedAnimatedAlign extends AnimatedWidget {
     Key? key,
   }) : super(key: key, listenable: animation);
 
+  /// The start alignment of the [child].
   final Alignment startAlignment;
 
+  /// The end alignment of the [child].
   final Alignment endAlignment;
 
+  /// The widget below this widget in the tree.
   final Widget child;
 
+  /// The animation curve.
   final Curve curve;
 
   @override

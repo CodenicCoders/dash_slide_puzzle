@@ -26,6 +26,8 @@ class ActiveSpellState with EquatableMixin {
   /// `0.0`.
   final double remainingTime;
 
+  /// Creates a copy of this [ActiveSpellState] but with the given fields
+  /// replaced with the new values.
   ActiveSpellState copyWith({
     Spell? spell,
     DateTime? startTime,

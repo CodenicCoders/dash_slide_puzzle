@@ -2,9 +2,16 @@ import 'package:application/application.dart';
 
 /// The available theme options.
 enum ThemeOption {
+  /// The identifier for the day theme.
   day,
-  night,
+
+  /// The identifier for the prevening theme.
+  ///
+  /// See https://bit.ly/3HkobC5.
   prevening,
+
+  /// The identifier for the evening theme.
+  night,
 }
 
 /// Switches the current theme to the next one.

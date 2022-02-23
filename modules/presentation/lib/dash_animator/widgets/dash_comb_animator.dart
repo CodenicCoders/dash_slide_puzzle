@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:presentation/assets/assets.dart';
-import 'package:presentation/dash_animator/widgets/widgets.dart';
 import 'package:presentation/presentation.dart';
 
 /// {@template DashCombAnimator}
@@ -17,8 +14,15 @@ class DashCombAnimator extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  /// Dictates the animated pose of the comb.
   final DashAnimationState animationState;
+
+  /// The [Animation] for moving the comb.
   final Animation<double> animation;
+
+  /// The bounding box of Dash.
+  ///
+  /// This is used to determine the proportion of the comb.
   final double boundingSize;
 
   @override

@@ -1,59 +1,100 @@
-import 'package:path/path.dart' as p;
+import 'package:presentation/presentation.dart';
 
-/// The available faces of Dash.
+/// An indeifier for the available faces of Dash.
 enum DashFace {
-  /// The plain look of Dash
+  /// An identifier for the `face_normal.webp` asset.
   normal,
 
-  /// The happy face of Dash
+  /// An identifier for the `face_happy.webp` asset.
   happy,
 
-  /// A cute face of Dash with dimples
+  /// An identifier for the 'face_kawaii.webp` asset.
   kawaii,
 
-  /// The judging face of Dash
+  /// An identifier for the `face_wtf.webp` asset.
   wtf,
 
-  /// Open mouthed Dash due to disbelief
+  /// An identifier for the `face_wtfff.webp` asset.
   wtfff,
 
+  /// An identifier for the `face_sad.webp` asset.
   sad,
+
+  /// An identifier for the `face_wizard.webp` asset.
   wizard,
+
+  /// An idenfifier for the `face_happy_wizard.webp` asset.
   happyWizard,
 }
 
+/// An identifier for Dash's laptop (Rich bird problems).
 enum DashDevice {
+  /// An identifier for the `purple_laptop.webp` asset.
   purpleLaptop,
+
+  /// An identifier for the `cyan_laptop.webp` asset.
   cyanLaptop,
+
+  /// An identifier for the `green_laptop.webp` asset.
   greenLaptop,
+
+  /// An identifier for the `pink_laptop.webp` asset.
   pinkLaptop,
 }
 
+/// An identier for Dash's body attire.
 enum DashBody {
+  /// An identifier for the `blue_hoodie.webp` asset.
   blueHoodie,
+
+  /// An identifier for the `blue_polo.webp` asset.
   bluePolo,
+
+  /// An identifier for the `blue_ribbon.webp` asset.
   blueRibbon,
+
+  /// An identifier for the `green_hoodie.webp` asset.
   greenHoodie,
+
+  /// An identifier for the `green_polo.webp` asset.
   greenPolo,
+
+  /// An identifier for the `nude.webp` asset.
   nude,
+
+  /// An identifier for the `wizard_robe.webp` asset.
   wizardRobe,
+
+  /// An identifier for the `yellow_polo.webp` asset.
   yellowPolo,
+
+  /// An identifier for the `yellow_tie.webp` asset.
   yellowTie,
 }
 
-/// Contains helper methods for fetching dash sprites.
+/// A class for fetching Dash related sprite assets.
 class DashSpriteAssets {
   DashSpriteAssets._();
 
   static final _root =
-      p.join('packages', 'presentation', 'assets', 'images', 'dash_sprites');
+      join(['packages', 'presentation', 'assets', 'images', 'dash_sprites']);
 
-  static final leftWing = p.join(_root, 'wings', 'left_wing.webp');
-  static final rightWing = p.join(_root, 'wings', 'right_wing.webp');
-  static final comb = p.join(_root, 'comb', 'comb.webp');
-  static final tail = p.join(_root, 'tail', 'tail.webp');
-  static final wand = p.join(_root, 'wand', 'wand.webp');
+  /// The file path to the Dash's `left_wing.webp` asset.
+  static final leftWing = join([_root, 'wings', 'left_wing.webp']);
 
+  /// The file path to the Dash's `right_wing.webp` asset.
+  static final rightWing = join([_root, 'wings', 'right_wing.webp']);
+
+  /// The file path to the Dash's `comb.webp` asset.
+  static final comb = join([_root, 'comb', 'comb.webp']);
+
+  /// The file path to the Dash's `tail.webp` asset.
+  static final tail = join([_root, 'tail', 'tail.webp']);
+
+  /// The file path to the Dash's `wand.webp` asset.
+  static final wand = join([_root, 'wand', 'wand.webp']);
+
+  /// Returns the file path of the specified [dashFace].
   static String face(DashFace dashFace) {
     final String fileName;
 
@@ -84,10 +125,11 @@ class DashSpriteAssets {
         break;
     }
 
-    final filePath = p.join(_root, 'faces', fileName);
+    final filePath = join([_root, 'faces', fileName]);
     return filePath;
   }
 
+  /// Returns the file path of the specified [dashDevice].
   static String device(DashDevice dashDevice) {
     final String fileName;
 
@@ -106,10 +148,11 @@ class DashSpriteAssets {
         break;
     }
 
-    final filePath = p.join(_root, 'devices', fileName);
+    final filePath = join([_root, 'devices', fileName]);
     return filePath;
   }
 
+  /// Returns the file path of the specified [dashBody].
   static String body(DashBody dashBody) {
     final String fileName;
 
@@ -143,7 +186,7 @@ class DashSpriteAssets {
         break;
     }
 
-    final filePath = p.join(_root, 'body', fileName);
+    final filePath = join([_root, 'body', fileName]);
     return filePath;
   }
 }

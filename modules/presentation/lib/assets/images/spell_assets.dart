@@ -1,13 +1,15 @@
 import 'package:application/application.dart';
-import 'package:path/path.dart' as p;
+import 'package:presentation/presentation.dart';
 
+/// A class for fetching spell-related assets.
 class SpellAssets {
   const SpellAssets._();
 
   static final _root =
-      p.join('packages', 'presentation', 'assets', 'images', 'spells');
+      join(['packages', 'presentation', 'assets', 'images', 'spells']);
 
-  static String image(Spell spell) {
+  /// Returns the file path of the specified [spell].
+  static String spell(Spell spell) {
     final String fileName;
 
     switch (spell) {
@@ -21,6 +23,6 @@ class SpellAssets {
         fileName = 'magic.webp';
     }
 
-    return p.join(_root, fileName);
+    return join([_root, fileName]);
   }
 }

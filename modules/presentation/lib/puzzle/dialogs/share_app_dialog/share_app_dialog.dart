@@ -4,15 +4,17 @@ import 'package:application/application.dart' as app;
 import 'package:presentation/presentation.dart';
 import 'package:presentation/puzzle/dialogs/share_app_dialog/share_button.dart';
 
+/// A dialog containing action buttons for sharing the app.
 class ShareAppDialog {
   ShareAppDialog._();
 
+  /// Shows the dialog.
   static void show({required BuildContext context}) {
     showGlassDialog(
       context: context,
       builder: (context) {
         final watchGameStateUseCase = context.read<app.WatchGameStateUseCase>();
-        final gameStatus = watchGameStateUseCase.rightEvent?.status;
+        final gameStatus = watchGameStateUseCase.rightEvent.status;
 
         return ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 512),
@@ -24,7 +26,7 @@ class ShareAppDialog {
                 const Flexible(
                   child: SizedBox(
                     width: double.maxFinite,
-                    child: DashAnimatorGroupControl(
+                    child: DashAnimatorGroup(
                       areDashAttireCustomizable: false,
                     ),
                   ),
@@ -36,7 +38,8 @@ class ShareAppDialog {
                     child: Transform(
                       alignment: Alignment.center,
                       transform: Matrix4.rotationY(pi),
-                      child: const DashAnimator(
+                      child: DashAnimator(
+                        dashAttire: DashAttire.generate(),
                         animationState: DashAnimationState.wave,
                       ),
                     ),
@@ -44,14 +47,13 @@ class ShareAppDialog {
                 ),
               const SizedBox(height: 16),
               Text(
-                _headline(gameStatus),
+                _headline(context, gameStatus),
                 style: Theme.of(context).textTheme.headline4,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
               Text(
-                'Share this puzzle to challenge your friends and see if they '
-                'have what it takes to beat Dash.',
+                AppLocalizations.of(context).shareDescription,
                 style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       color: Theme.of(context).textTheme.caption?.color,
                     ),
@@ -61,9 +63,9 @@ class ShareAppDialog {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  ShareButton(shareButtonType: ShareButtonType.twitter),
+                  ShareButton(socialMedia: SocialMedia.twitter),
                   SizedBox(width: 16),
-                  ShareButton(shareButtonType: ShareButtonType.facebook),
+                  ShareButton(socialMedia: SocialMedia.facebook),
                 ],
               ),
             ],
@@ -73,18 +75,18 @@ class ShareAppDialog {
     );
   }
 
-  static String _headline(app.GameStatus? gameStatus) {
+  static String _headline(BuildContext context, app.GameStatus? gameStatus) {
     switch (gameStatus) {
       case app.GameStatus.playerWon:
-        return 'You won!';
+        return AppLocalizations.of(context).shareTitleWon;
       case app.GameStatus.botWon:
-        return 'Better luck next time!';
+        return AppLocalizations.of(context).shareTitleLost;
       case app.GameStatus.notStarted:
       case app.GameStatus.initializing:
       case app.GameStatus.shuffling:
       case app.GameStatus.playing:
       case null:
-        return 'Need help?';
+        return AppLocalizations.of(context).shareTitleGeneral;
     }
   }
 }

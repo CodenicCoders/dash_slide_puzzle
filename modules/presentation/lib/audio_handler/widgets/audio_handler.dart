@@ -1,11 +1,16 @@
 import 'package:application/application.dart' as app;
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/presentation.dart';
 
+/// {@template AudioHandler}
+///
+/// A widget for playing most of the audio.
+///
+/// {@endtemplate}
 class AudioHandler extends StatelessWidget {
+  /// {@macro AudioHandler}
   const AudioHandler({required this.child, Key? key}) : super(key: key);
 
+  /// The widget below this widget in the tree.
   final Widget child;
 
   @override

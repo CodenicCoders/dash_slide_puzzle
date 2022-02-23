@@ -1,7 +1,6 @@
 import 'package:application/application.dart' as app;
 import 'package:flutter/material.dart';
 import 'package:presentation/assets/assets.dart';
-import 'package:simple_shadow/simple_shadow.dart';
 
 /// {@template SpellBanner}
 ///
@@ -12,6 +11,7 @@ class SpellBanner extends StatelessWidget {
   /// {@macro SpelLBanner}
   const SpellBanner({required this.spell, Key? key}) : super(key: key);
 
+  /// The spell casted.
   final app.Spell spell;
 
   @override
@@ -20,10 +20,7 @@ class SpellBanner extends StatelessWidget {
       children: [
         Expanded(
           flex: 2,
-          child: SimpleShadow(
-            offset: Offset.zero,
-            child: Image.asset(SpellAssets.image(spell)),
-          ),
+          child: Image.asset(SpellAssets.spell(spell)),
         ),
         const SizedBox(height: 8),
         Expanded(

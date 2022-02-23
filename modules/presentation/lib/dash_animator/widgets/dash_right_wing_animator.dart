@@ -17,15 +17,25 @@ class DashRightWingAnimator extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
+  /// Dictates the animated pose of the right wing.
   final DashAnimationState animationState;
+
+  /// The [Animation] for moving the right wing.
   final Animation<double> animation;
+
+  /// The bounding box of Dash.
+  ///
+  /// This is used to determine the proportion of the right wing.
   final double boundingSize;
 
   @override
   State<DashRightWingAnimator> createState() => DashRightWingAnimatorState();
 }
 
+/// The state for the [DashRightWingAnimator].
 class DashRightWingAnimatorState extends State<DashRightWingAnimator> {
+  /// A key assigned to Dash's right wing used for receiving or tossing 
+  /// throwable objects.
   final wingKey = GlobalKey();
 
   @override

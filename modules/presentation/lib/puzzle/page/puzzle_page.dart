@@ -1,8 +1,14 @@
 import 'package:application/application.dart' as app;
 import 'package:presentation/presentation.dart';
 
+/// {@template PuzzlePage}
+///
+/// The main page for the puzzle game.
+///
+/// {@endtemplate}
 class PuzzlePage extends StatelessWidget {
-  const PuzzlePage();
+  /// {@macro PuzzlePage}
+  const PuzzlePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,24 +29,17 @@ class PuzzlePage extends StatelessWidget {
               SizedBox(width: 16),
               VolumeActionItem(),
               SizedBox(width: 16),
-              MenuButton(),
+              Menu(),
               SizedBox(width: 16),
             ],
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: const FloatingActionButtons(),
-          body: BackgroundRenderer(
+          body: BackgroundHandler(
             child: SafeArea(
               child: LayoutBuilder(
                 builder: (context, constraints) {
-                  final gameState =
-                      context.watch<app.WatchGameStateUseCase>().rightEvent;
-
-                  if (gameState == null) {
-                    return Container();
-                  }
-
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -49,7 +48,7 @@ class PuzzlePage extends StatelessWidget {
                         Expanded(child: SpellHandler()),
                         Expanded(
                           flex: 3,
-                          child: DashAnimatorGroupControl(),
+                          child: DashAnimatorGroup(),
                         ),
                         Expanded(
                           flex: 6,

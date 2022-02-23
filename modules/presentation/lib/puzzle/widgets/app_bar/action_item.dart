@@ -3,11 +3,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:presentation/presentation.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
+/// {@template ActionItem}
+///
+/// The root widget for all the action items in [PuzzlePage].
+///
+/// {@endtemplate}
 class ActionItem extends StatelessWidget {
+  /// {@macro ActionItem}
   const ActionItem({required this.onPressed, required this.iconData, Key? key})
       : super(key: key);
 
+  /// The callback button when this item is pressed.
   final VoidCallback onPressed;
+
+  /// The icon for this action item.
   final IconData iconData;
 
   @override

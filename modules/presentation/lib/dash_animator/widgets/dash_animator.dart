@@ -1,44 +1,72 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:presentation/assets/assets.dart';
 import 'package:presentation/dash_animator/dash_animator.dart';
 
+/// Contains all the available animation states of Dash.
 enum DashAnimationState {
+  /// Dash's idle pose.
   idle,
+
+  /// Dash's happy pose.
   happy,
+
+  /// Dash's throwing pose.
   toss,
+
+  /// Dash's taunting pose.
   taunt,
+
+  /// Dash's excited pose.
   excited,
+
+  /// Dash's skeptic pose.
   wtf,
+
+  /// Dash's shocked pose.
   wtfff,
+
+  /// Dash's pose when losing.
   loser,
+
+  /// Dash's waving pose.
   wave,
+
+  /// Dash's pose when casting a spell.
   spellcast,
+
+  /// Dash's taunting pose in wizard uniform.
   wizardTaunt,
 }
 
+/// {@template DashAnimator}
+///
+/// The root animator of Dash.
+///
+/// {@endtemplate}
 class DashAnimator extends StatefulWidget {
+  /// {@macro DashAnimator}
   const DashAnimator({
+    required this.dashAttire,
     this.animationLength = const Duration(seconds: 2),
     this.animationState = DashAnimationState.idle,
-    this.dashBody = DashBody.nude,
-    this.dashDevice = DashDevice.cyanLaptop,
     Key? key,
   }) : super(key: key);
+
+  /// The attire of Dash.
+  final DashAttire dashAttire;
 
   /// The time it takes for the animation to interpolate from `0` to `1`.
   final Duration animationLength;
 
+  /// The pose of Dash.
   final DashAnimationState animationState;
-
-  final DashBody dashBody;
-  final DashDevice dashDevice;
 
   @override
   State<DashAnimator> createState() => DashAnimatorState();
 }
 
+/// The state of [DashAnimator].
 class DashAnimatorState extends State<DashAnimator>
     with SingleTickerProviderStateMixin {
   final _rightWingAnimatorKey = GlobalKey<DashRightWingAnimatorState>();
@@ -48,10 +76,13 @@ class DashAnimatorState extends State<DashAnimator>
       AnimationController(duration: widget.animationLength, vsync: this)
         ..repeat(reverse: true);
 
+  /// A key assigned to the right wing of this Dash animator.
   GlobalKey? get rightWingKey => _rightWingAnimatorKey.currentState?.wingKey;
 
+  /// A key assigned to the left wing of this Dash animator.
   GlobalKey? get leftWingKey => _leftWingAnimatorKey.currentState?.wingKey;
 
+  /// Dash throws a pizza precisely at the [target] widget.
   void throwPizza(GlobalKey target) {
     ObjectThrowAnimationOverlay.throwObject(
       context: context,
@@ -61,6 +92,7 @@ class DashAnimatorState extends State<DashAnimator>
     );
   }
 
+  /// Dash throws a stone precisely at the [target] widget.
   void throwStone(GlobalKey target) {
     ObjectThrowAnimationOverlay.throwObject(
       context: context,
@@ -127,7 +159,7 @@ class DashAnimatorState extends State<DashAnimator>
                         animationState: widget.animationState,
                         animation: _animation,
                         boundingSize: boundingSize,
-                        dashBody: widget.dashBody,
+                        dashBody: widget.dashAttire.dashBody,
                       ),
                       GestureDetector(
                         behavior: HitTestBehavior.translucent,
@@ -146,7 +178,7 @@ class DashAnimatorState extends State<DashAnimator>
                         animationState: widget.animationState,
                         animation: _animation,
                         boundingSize: boundingSize,
-                        dashDevice: widget.dashDevice,
+                        dashDevice: widget.dashAttire.dashDevice,
                       ),
                     ],
                   ),

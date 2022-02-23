@@ -5,7 +5,7 @@ import 'package:domain/domain.dart';
 /// A use case for watching the active [GameState].
 ///
 /// See [GameService.watchGameState].
-/// 
+///
 /// {@endtemplate}
 class WatchGameStateUseCase extends Watcher<void, Failure,
     VerboseStream<Failure, GameState>, Failure, GameState> {
@@ -14,6 +14,9 @@ class WatchGameStateUseCase extends Watcher<void, Failure,
       : _gameService = gameService;
 
   final GameService _gameService;
+
+  @override
+  GameState get rightEvent => super.rightEvent ?? GameState();
 
   @override
   Future<Either<Failure, VerboseStream<Failure, GameState>>> onCall(

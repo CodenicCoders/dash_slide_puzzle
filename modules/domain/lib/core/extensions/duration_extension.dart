@@ -44,6 +44,7 @@ extension DurationExtension on Duration {
         : Duration(microseconds: totalMicroseconds);
   }
 
+  /// Returns a random [Duration] between this and the [other] duration.
   Duration randomInBetween(Duration other) {
     final durationInMicro = inMicroseconds;
     final durationInMicroOther = other.inMicroseconds;
@@ -57,6 +58,7 @@ extension DurationExtension on Duration {
     return Duration(microseconds: newDurationInMicro.toInt());
   }
 
+  /// Returns the mid [Duration] between this and the [other] duration.
   Duration inBetween(Duration other) {
     final durationInMicro = inMicroseconds;
     final durationInMicroOther = other.inMicroseconds;

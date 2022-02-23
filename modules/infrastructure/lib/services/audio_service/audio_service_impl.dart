@@ -5,13 +5,24 @@ import 'package:infrastructure/infrastructure.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/subjects.dart';
 
+/// {@template AudioServiceImpl}
+///
+/// An implementation of the [AudioService].
+///
+/// {@endtemplate}
 class AudioServiceImpl implements AudioService {
+  /// {@macrp AudioServiceImpl}
   AudioServiceImpl({
     required CodenicLogger logger,
     this.maxAudioPlayerChannels = 5,
   }) : _logger = logger;
 
   final CodenicLogger _logger;
+
+  /// The max number of audio player channels.
+  ///
+  /// When the max value is reached, then the oldest audio player channel will
+  /// be disposed.
   final int maxAudioPlayerChannels;
 
   final _lastUsedAudioPlayerChannels = <dynamic>[];
@@ -68,6 +79,7 @@ class AudioServiceImpl implements AudioService {
     return audioPlayer;
   }
 
+  @override
   Future<Either<Failure, void>> playLocalAudio({
     required String localFilePath,
     dynamic audioPlayerChannel,

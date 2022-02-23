@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:application/application.dart' as app;
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
+import 'package:presentation/presentation.dart';
 import 'package:presentation/spell_handler/spell_button.dart';
 
 /// {@template AvailableSpellIndicator}
@@ -10,10 +11,7 @@ import 'package:presentation/spell_handler/spell_button.dart';
 /// {@endtemplate}
 class AvailableSpellIndicator extends StatelessWidget {
   /// {@macro AvailableSpellIndicator}
-  const AvailableSpellIndicator({required this.spellEnergy, Key? key})
-      : super(key: key);
-
-  final double spellEnergy;
+  const AvailableSpellIndicator({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +25,7 @@ class AvailableSpellIndicator extends StatelessWidget {
             borderRadius: BorderRadius.circular(108),
           ),
           constraints: const BoxConstraints(maxWidth: 512, maxHeight: 24),
-          child: LiquidLinearProgressIndicator(
-            value: spellEnergy,
-            backgroundColor: Colors.transparent,
-            valueColor: AlwaysStoppedAnimation(
-              Theme.of(context).primaryColorDark,
-            ),
-            borderColor: Colors.transparent,
-            borderWidth: 0,
-            borderRadius: 108,
-          ),
+          child: const _ProgressIndicator(),
         ),
         AspectRatio(
           aspectRatio: 1,
@@ -49,7 +38,7 @@ class AvailableSpellIndicator extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(108),
-                color: Theme.of(context).primaryColorDark,
+                color: Theme.of(context).primaryColor,
               ),
               child: Stack(
                 alignment: Alignment.center,
@@ -60,6 +49,27 @@ class AvailableSpellIndicator extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ProgressIndicator extends StatelessWidget {
+  const _ProgressIndicator({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final spellEnergy =
+        context.select<app.WatchAvailableSpellStateUseCase, double>(
+      (useCase) => useCase.rightEvent?.energy ?? 0,
+    );
+
+    return LiquidLinearProgressIndicator(
+      value: spellEnergy,
+      backgroundColor: Colors.transparent,
+      valueColor: AlwaysStoppedAnimation(Theme.of(context).primaryColor),
+      borderColor: Colors.transparent,
+      borderWidth: 0,
+      borderRadius: 108,
     );
   }
 }

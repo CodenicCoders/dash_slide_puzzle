@@ -43,6 +43,28 @@
         "-d",
         "chrome"
       ]
+    },
+    {
+      "name": "debug_macos",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "args": [
+        "--debug",
+        "-d",
+        "macos"
+      ]
+    },
+    {
+      "name": "profile_macos",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "args": [
+        "--profile",
+        "-d",
+        "macos"
+      ]
     }
   ]
 }

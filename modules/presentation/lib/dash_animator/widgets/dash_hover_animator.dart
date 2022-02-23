@@ -16,13 +16,18 @@ class DashHoverAnimator extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  /// Dictates the animated pose of the body.
   final DashAnimationState animationState;
+
+  /// The [Animation] for moving the body.
   final Animation<double> animation;
+
+  /// The widget below this widget in the tree.
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final startHoverOffset = Alignment.bottomCenter;
+    const startHoverOffset = Alignment.bottomCenter;
 
     final Alignment endHoverOffset;
     final Curve hoverCurve;

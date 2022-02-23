@@ -1,11 +1,13 @@
+import 'dart:async';
+
 import 'package:application/application.dart' as app;
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:presentation/assets/assets.dart';
+import 'package:flutter/services.dart';
+import 'package:presentation/presentation.dart';
+import 'package:rive/rive.dart';
 
 /// {@template PuzzleTile}
 ///
-/// Represents a [tile] of a [app.Puzzle].
+/// The puzzle tile for the [PuzzleBoard].
 ///
 /// {@endtemplate}
 class PuzzleTile extends StatefulWidget {
@@ -13,7 +15,6 @@ class PuzzleTile extends StatefulWidget {
   const PuzzleTile({
     required this.puzzle,
     required this.tile,
-    required this.themeVariant,
     this.isInteractive = false,
     this.isReactiveToSpells = false,
     Key? key,
@@ -24,9 +25,6 @@ class PuzzleTile extends StatefulWidget {
 
   /// The [tile] represented by this widget.
   final app.Tile tile;
-
-  /// The Dashatar theme of this puzzle tile.
-  final DashatarVariant themeVariant;
 
   /// If `true`, then the user can tap this tile to move it. Otherwise, if
   /// `false`, then this tile cannot be tapped.
@@ -42,98 +40,179 @@ class PuzzleTile extends StatefulWidget {
 }
 
 class _PuzzleTileState extends State<PuzzleTile> {
+  Artboard? _artboard;
+  StateMachineController? _stateMachineController;
+  SMIInput<double>? _changeThemeSMIInput;
+
   double _scale = 1;
+
+  /// Prevents multiple [_syncAnimationTheme] from executing.
+  bool _isAnimationThemeSyncing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadRiveAnimation();
+  }
+
+  Future<void> _loadRiveAnimation() async {
+    final data = await rootBundle.load(PuzzleBoardAnimations.riveFilePath);
+
+    final riveFile = RiveFile.import(data);
+
+    _artboard = riveFile.artboardByName(
+      PuzzleBoardAnimations.tileArtboard(widget.tile.targetPosition),
+    );
+
+    _stateMachineController =
+        StateMachineController.fromArtboard(_artboard!, 'change_theme');
+
+    _changeThemeSMIInput = _stateMachineController!.findInput<double>('theme');
+
+    _artboard!.addController(_stateMachineController!);
+
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {});
+
+    unawaited(_syncAnimationTheme());
+  }
+
+  /// Updates the animation's theme from one state to the next until its theme
+  /// is synced with the app's current theme.
+  ///
+  /// This is done recursively to create a smooth theme transition.
+  Future<void> _syncAnimationTheme() async {
+    if (_isAnimationThemeSyncing) {
+      return;
+    }
+
+    if (_changeThemeSMIInput == null) {
+      return;
+    }
+
+    _isAnimationThemeSyncing = true;
+    await syncRiveAnimationTheme(this, _changeThemeSMIInput!);
+    _isAnimationThemeSyncing = false;
+  }
+
+  @override
+  void dispose() {
+    _stateMachineController?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final gameStatus =
-        context.select<app.WatchGameStateUseCase, app.GameStatus?>(
-      (useCase) => useCase.rightEvent?.status,
+    final isMovable = context.select<app.WatchGameStateUseCase, bool>(
+      (useCase) =>
+          widget.isInteractive &&
+          useCase.rightEvent.status == app.GameStatus.playing,
     );
 
-    final activeSpell =
-        context.select<app.WatchActiveSpellStateUseCase, app.Spell?>(
-      (useCase) => useCase.rightEvent?.spell,
-    );
+    return BlocListener<app.SwitchThemeUseCase, app.RunnerState>(
+      listener: (context, state) => _syncAnimationTheme(),
+      child: AnimatedAlign(
+        alignment: FractionalOffset(
+          widget.tile.currentPosition.x / (widget.puzzle.dimension - 1),
+          widget.tile.currentPosition.y / (widget.puzzle.dimension - 1),
+        ),
+        duration: const Duration(milliseconds: 300),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final size = constraints.maxWidth / widget.puzzle.dimension * 0.95;
 
-    final isMovable =
-        widget.isInteractive && gameStatus == app.GameStatus.playing;
-
-    final Color colorTint;
-
-    if (widget.isReactiveToSpells) {
-      switch (activeSpell) {
-        case app.Spell.slow:
-          colorTint = Colors.green.withOpacity(0.38);
-          break;
-        case app.Spell.stun:
-          colorTint = Colors.black38;
-          break;
-        case app.Spell.timeReversal:
-          colorTint = Colors.red.withOpacity(0.38);
-          break;
-        case null:
-          colorTint = Colors.transparent;
-      }
-    } else {
-      colorTint = Colors.transparent;
-    }
-
-    return AnimatedAlign(
-      alignment: FractionalOffset(
-        widget.tile.currentPosition.x / (widget.puzzle.dimension - 1),
-        widget.tile.currentPosition.y / (widget.puzzle.dimension - 1),
-      ),
-      duration: const Duration(milliseconds: 300),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          return MouseRegion(
-            onEnter:
-                isMovable ? (event) => setState(() => _scale = 0.9) : null,
-            onExit: isMovable ? (event) => setState(() => _scale = 1) : null,
-            child: SizedBox.square(
-              dimension:
-                  constraints.maxWidth / widget.puzzle.dimension * 0.95,
-              child: AnimatedScale(
-                duration: const Duration(milliseconds: 300),
-                scale: _scale,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          DashatarAssets.tileImage(
-                            widget.themeVariant,
-                            widget.tile.targetPosition,
-                          ),
-                        ),
-                      ),
-                    ),
-                    child: AnimatedContainer(
-                      color: colorTint,
+            return GestureDetector(
+              onTap: isMovable ? _onMoveTile : null,
+              child: MouseRegion(
+                onEnter:
+                    isMovable ? (event) => setState(() => _scale = 0.9) : null,
+                onExit:
+                    isMovable ? (event) => setState(() => _scale = 1) : null,
+                child: SizedBox.square(
+                  dimension: size,
+                  child: AnimatedScale(
+                    duration: const Duration(milliseconds: 300),
+                    scale: _scale,
+                    child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 500),
-                      child: isMovable
-                          ? Material(
-                              color: Colors.transparent,
-                              child: InkWell(onTap: _onTap),
-                            )
+                      switchInCurve: Curves.easeOut,
+                      transitionBuilder: (child, animation) => ScaleTransition(
+                        scale: animation,
+                        child: child,
+                      ),
+                      child: _artboard != null
+                          ? widget.isReactiveToSpells
+                              ? _SpellTint(child: Rive(artboard: _artboard!))
+                              : Rive(artboard: _artboard!)
                           : null,
                     ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
 
-  void _onTap() => context.read<app.MovePlayerTileUseCase>().run(
-        params: app.MovePlayerTileParams(
-          tileCurrentPosition: widget.tile.currentPosition,
-        ),
-      );
+  void _onMoveTile() {
+    context.read<app.MovePlayerTileUseCase>().run(
+          params: app.MovePlayerTileParams(
+            tileCurrentPosition: widget.tile.currentPosition,
+          ),
+        );
+  }
+}
 
+class _SpellTint extends StatelessWidget {
+  const _SpellTint({required this.child, Key? key}) : super(key: key);
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final activeSpell =
+        context.select<app.WatchActiveSpellStateUseCase, app.Spell?>(
+      (useCase) => useCase.rightEvent?.spell,
+    );
+
+    final Color? tintColor;
+
+    switch (activeSpell) {
+      case app.Spell.slow:
+        tintColor = Colors.green.withOpacity(0.54);
+        break;
+      case app.Spell.stun:
+        tintColor = Colors.black54;
+        break;
+      case app.Spell.timeReversal:
+        tintColor = Colors.red.withOpacity(0.54);
+        break;
+      case null:
+        tintColor = null;
+        break;
+    }
+
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        child,
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          child: tintColor != null
+              ? Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: tintColor,
+                  ),
+                )
+              : null,
+        )
+      ],
+    );
+  }
 }

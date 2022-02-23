@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_social_button/flutter_social_button.dart';
 import 'package:presentation/constants/breakpoints.dart';
 import 'package:presentation/helpers/dialogs/dialogs.dart';
+import 'package:presentation/l10n/app_localizations.dart';
 
+/// A dialog for showing all the available keyboard shortcuts in the app.
 class KeyboardShortcutDialog {
   KeyboardShortcutDialog._();
 
+  /// Shows the dialog.
   static void show({required BuildContext context}) {
     showGlassDialog(
       context: context,
@@ -28,57 +31,71 @@ class KeyboardShortcutDialog {
                 Wrap(
                   runSpacing: 8,
                   spacing: 32,
-                  children: const [
-                    KeyboardShortcut.icon(
-                      title: 'Customize Dash',
+                  children: [
+                    _KeyboardShortcut.icon(
+                      title: AppLocalizations.of(context)
+                          .customizeDashKeyboardShortcutTitle,
                       keyboardIcon: FontAwesomeIcons.chevronLeft,
                     ),
-                    KeyboardShortcut.icon(
-                      title: 'Customize enemy Dash',
+                    _KeyboardShortcut.icon(
+                      title: AppLocalizations.of(context)
+                          .customizeEnemyDashKeyboardShortcutTitle,
                       keyboardIcon: FontAwesomeIcons.chevronRight,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'Change theme',
-                      text: '/',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .changeThemeKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .changeThemeKeyboardShortcutKey,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'On/Off Volume',
-                      text: 'M',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .volumeKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .volumeKeyboardShortcutKey,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'View puzzle reference',
-                      text: 'Z',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .viewPuzzleReferenceKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .viewPuzzleReferenceKeyboardShortcutKey,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'Start/restart game',
-                      text: 'ENTER',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .gameActionKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .gameActionKeyboardShortcutKey,
                     ),
                   ],
                 ),
                 const SizedBox(height: 32),
                 Text(
-                  'In Game',
+                  AppLocalizations.of(context).inGameKeyboardShortcutsTitle,
                   style: Theme.of(context).textTheme.headline4,
                 ),
                 const SizedBox(height: 32),
                 Wrap(
                   runSpacing: 8,
                   spacing: 32,
-                  children: const [
-                    KeyboardShortcut.icon(
-                      title: 'Move tile upward',
+                  children: [
+                    _KeyboardShortcut.icon(
+                      title: AppLocalizations.of(context)
+                          .moveTileUpwardKeyboardShortcutTitle,
                       keyboardIcon: FontAwesomeIcons.arrowUp,
                     ),
-                    KeyboardShortcut.icon(
-                      title: 'Move tile downward',
+                    _KeyboardShortcut.icon(
+                      title: AppLocalizations.of(context)
+                          .moveTileDownwardKeyboardShortcutTitle,
                       keyboardIcon: FontAwesomeIcons.arrowDown,
                     ),
-                    KeyboardShortcut.icon(
-                      title: 'Move tile to the left',
+                    _KeyboardShortcut.icon(
+                      title: AppLocalizations.of(context)
+                          .moveTileToTheLeftKeyboardShortcutTitle,
                       keyboardIcon: FontAwesomeIcons.arrowLeft,
                     ),
-                    KeyboardShortcut.icon(
-                      title: 'Move tile to the rght',
+                    _KeyboardShortcut.icon(
+                      title: AppLocalizations.of(context)
+                          .moveTileToTheRightKeyboardShortcutTitle,
                       keyboardIcon: FontAwesomeIcons.arrowRight,
                     ),
                   ],
@@ -87,66 +104,91 @@ class KeyboardShortcutDialog {
                 Wrap(
                   runSpacing: 8,
                   spacing: 32,
-                  children: const [
-                    KeyboardShortcut.text(
-                      title: 'Cast spell',
-                      text: 'SPACE',
+                  children: [
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .castSpellKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .castSpellKeyboardShortcutKey,
                     ),
                   ],
                 ),
                 const SizedBox(height: 32),
                 Text(
-                  'In Dash Animator Preview',
+                  AppLocalizations.of(context)
+                      .inDashAnimatorPreviewKeyboardShortcutsTitle,
                   style: Theme.of(context).textTheme.headline4,
                 ),
                 const SizedBox(height: 32),
                 Wrap(
                   runSpacing: 8,
                   spacing: 32,
-                  children: const [
-                    KeyboardShortcut.text(
-                      title: 'Idle',
-                      text: '`',
+                  children: [
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .dashIdlePoseKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .dashIdlePoseKeyboardShortcutKey,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'Happy',
-                      text: '1',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .dashHappyPoseKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .dashHappyPoseKeyboardShortcutKey,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'Toss',
-                      text: '2',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .dashTossPoseKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .dashTossPoseKeyboardShortcutKey,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'Taunt',
-                      text: '3',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .dashTauntPoseKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .dashTauntPoseKeyboardShortcutKey,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'Excited',
-                      text: '4',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .dashExcitedPoseKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .dashExcitedPoseKeyboardShortcutKey,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'Skepticism',
-                      text: '5',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .dashSkepticismPoseKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .dashSkepticismPoseKeyboardShortcutKey,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'Bewildered',
-                      text: '6',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .dashShockedPoseKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .dashShockedPoseKeyboardShortcutKey,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'Loser',
-                      text: '7',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .dashLostPoseKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .dashLostPoseKeyboardShortcutKey,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'Wave',
-                      text: '8',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .dashWavePoseKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .dashWavePoseKeyboardShortcutKey,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'Spellcast',
-                      text: '9',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .dashCastSpellPoseKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .dashCastSpellPoseKeyboardShortcutKey,
                     ),
-                    KeyboardShortcut.text(
-                      title: 'Wizard taunt',
-                      text: '0',
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .dashWizardTauntPoseKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .dashWizardTauntPoseKeyboardShortcutKey,
                     ),
                   ],
                 ),
@@ -154,10 +196,12 @@ class KeyboardShortcutDialog {
                 Wrap(
                   runSpacing: 8,
                   spacing: 32,
-                  children: const [
-                    KeyboardShortcut.text(
-                      title: 'Customize Dash',
-                      text: 'SPACE',
+                  children: [
+                    _KeyboardShortcut.text(
+                      title: AppLocalizations.of(context)
+                          .customizeDashAttireKeyboardShortcutTitle,
+                      text: AppLocalizations.of(context)
+                          .customizeDashAttireKeyboardShortcutKey,
                     ),
                   ],
                 ),
@@ -170,17 +214,19 @@ class KeyboardShortcutDialog {
   }
 }
 
-class KeyboardShortcut extends StatelessWidget {
-  const KeyboardShortcut.icon({
+class _KeyboardShortcut extends StatelessWidget {
+  const _KeyboardShortcut.icon({
     required this.title,
     required this.keyboardIcon,
     Key? key,
   })  : text = null,
         super(key: key);
 
-  const KeyboardShortcut.text(
-      {required this.title, required this.text, Key? key})
-      : keyboardIcon = null,
+  const _KeyboardShortcut.text({
+    required this.title,
+    required this.text,
+    Key? key,
+  })  : keyboardIcon = null,
         super(key: key);
 
   final String title;

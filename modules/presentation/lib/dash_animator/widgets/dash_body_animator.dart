@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:presentation/assets/assets.dart';
-import 'package:presentation/dash_animator/dash_animator.dart';
-import 'package:presentation/helpers/helpers.dart';
+import 'package:presentation/presentation.dart';
 
 /// {@template DashBodyAnimator}
 ///
@@ -18,19 +15,23 @@ class DashBodyAnimator extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  /// Dictates the animated pose of the body.
   final DashAnimationState animationState;
+
+  /// The [Animation] for moving the body.
   final Animation<double> animation;
+
+  /// The bounding box of Dash.
+  /// 
+  /// This is used to determine the proportion of the body.
   final double boundingSize;
+
+  /// The clothing for the body.
   final DashBody dashBody;
 
   @override
   Widget build(BuildContext context) {
     const alignment = FractionalOffset(5 / 12, 9 / 12);
-    const startScale = 1.0;
-    const endScale = 0.96;
-
-    final Curve curve;
-
     final DashBody preferredDashBody;
 
     switch (animationState) {
@@ -41,20 +42,16 @@ class DashBodyAnimator extends StatelessWidget {
       case DashAnimationState.wtfff:
       case DashAnimationState.loser:
       case DashAnimationState.wave:
-        curve = Curves.easeIn;
         preferredDashBody = dashBody;
         break;
       case DashAnimationState.taunt:
       case DashAnimationState.excited:
-        curve = const McDonaldCurve();
         preferredDashBody = dashBody;
         break;
       case DashAnimationState.wizardTaunt:
-        curve = const McDonaldCurve();
         preferredDashBody = DashBody.wizardRobe;
         break;
       case DashAnimationState.spellcast:
-        curve = Curves.easeIn;
         preferredDashBody = DashBody.wizardRobe;
         break;
     }
@@ -63,25 +60,17 @@ class DashBodyAnimator extends StatelessWidget {
       alignment: alignment,
       child: SizedBox.square(
         dimension: boundingSize,
-        child: SyncedAnimatedScale(
-          animation: animation,
-          curve: curve,
-          startScale: startScale,
-          endScale: endScale,
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            reverseDuration: const Duration(milliseconds: 600),
-            switchOutCurve: Curves.easeOutExpo,
-            transitionBuilder: (child, animation) {
-              return FadeTransition(
-                opacity: animation,
-                child: SizeTransition(sizeFactor: animation, child: child),
-              );
-            },
-            child: Image.asset(
-              DashSpriteAssets.body(preferredDashBody),
-              key: ValueKey(preferredDashBody),
-            ),
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          reverseDuration: const Duration(milliseconds: 600),
+          switchOutCurve: Curves.easeOutExpo,
+          transitionBuilder: (child, animation) => FadeTransition(
+            opacity: animation,
+            child: SizeTransition(sizeFactor: animation, child: child),
+          ),
+          child: Image.asset(
+            DashSpriteAssets.body(preferredDashBody),
+            key: ValueKey(preferredDashBody),
           ),
         ),
       ),

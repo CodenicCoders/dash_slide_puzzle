@@ -2,36 +2,38 @@ import 'package:application/application.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MainTheme {
-  static ThemeData option(ThemeOption themeOption) {
+/// Contains the available themes for the app.
+class Themes {
+  /// Returns the correct theme based on the given [themeOption].
+  static ThemeData theme(ThemeOption themeOption) {
     final Color primaryColor;
     final Color primaryColorDark;
-    final Color scaffoldBackgroundColor;
+    final Color primaryColorLight;
 
     switch (themeOption) {
       case ThemeOption.day:
-        primaryColor = Colors.lightBlue;
-        primaryColorDark = const Color(0xff007ac1);
-        scaffoldBackgroundColor = const Color(0xff67daff);
+        primaryColor = Colors.blue.shade600;
+        primaryColorLight = const Color(0xff69b6ff);
+        primaryColorDark = const Color(0xff005bb2);
         break;
       case ThemeOption.prevening:
-        primaryColor = Colors.amber;
-        primaryColorDark = const Color(0xffc79100);
-        scaffoldBackgroundColor = Colors.amber.shade400;
+        primaryColor = Colors.purple;
+        primaryColorLight = const Color(0xffc158dc);
+        primaryColorDark = const Color(0xff5c007a);
         break;
       case ThemeOption.night:
         primaryColor = Colors.indigo;
-        primaryColorDark = const Color(0xff002984);
-        scaffoldBackgroundColor = const Color(0xff757de8);
+        primaryColorLight = const Color(0xff6f74dd);
+        primaryColorDark = const Color(0xff00227b);
         break;
     }
 
-    return ThemeData.light().copyWith(
+    return ThemeData(
       typography: Typography.material2018(),
       colorScheme: const ColorScheme.light().copyWith(primary: primaryColor),
-      scaffoldBackgroundColor: scaffoldBackgroundColor,
       primaryColor: primaryColor,
       primaryColorDark: primaryColorDark,
+      primaryColorLight: primaryColorLight,
       textTheme: GoogleFonts.bangersTextTheme(),
     );
   }
