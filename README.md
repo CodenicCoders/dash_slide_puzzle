@@ -3,6 +3,10 @@
 
 Prepare to fight Dash in a no-holds-barred Slider Puzzle! Strategically use various skills to turn the tides in your favor.
 
+This is a slide puzzle game created for the Flutter Puzzle Hack. A hackathon where developers are challenged to push their creativity and create the most visually appealing slide puzzle game using Flutter!
+
+For more info on the Flutter Puzzle Hack, see https://flutter.dev/events/puzzle-hack.
+
 <img width="792" alt="cover" src="https://user-images.githubusercontent.com/12520299/158085197-5b2a463b-dbda-4f18-9a1a-4bf1d46cf4f7.png">
 
 ## Features
@@ -13,6 +17,20 @@ This game allows you to:
 - customize the game theme.
 - customize your personal Dash and your opponent's Dash avatar.
 - preview the Dash animator.
+
+## "Try it out" links
+
+**Apple App Store (Recommended for Apple Users)**
+
+https://apps.apple.com/us/app/dash-slide-puzzle/id1612604096
+
+**Google Play Store (Recommended for Android Users)**
+
+https://play.google.com/store/apps/details?id=com.orga.dash_slide_puzzle
+
+**Web**
+
+https://slidepuzzle.codenic.dev
 
 ## Getting started
 
@@ -68,3 +86,7 @@ https://github.com/CodenicCoders/dash_slide_puzzle/tree/master/modules/infrastru
 
 For a printed demo of the search results, visit `test/puzzle_service_impl_test.dart` then uncomment and run the test group `demo`.
 https://github.com/CodenicCoders/dash_slide_puzzle/blob/master/modules/infrastructure/test/puzzle_service_impl_test.dart
+
+## About Me
+
+To know more about this and my other projects, feel free to visit my portfolio at https://dominicorga.codenic.dev.
